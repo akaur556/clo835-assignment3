@@ -2,19 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
+  namespace: lab3
+  labels:
+    app: mysql
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      application: mysql
+     app: mysql
   template:
     metadata:
       labels:
-        application: mysql
+        app: mysql
     spec:
       containers:
-      - name: mysql
-        image: 940156990945.dkr.ecr.us-east-1.amazonaws.com/clo835-mysql-repo:db
+      - image: 940156990945.dkr.ecr.us-east-1.amazonaws.com/clo835-mysql-repo:db
+        name: mysql
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: pw
         volumeMounts:
         - mountPath: /data
           name: mysql-pvc
