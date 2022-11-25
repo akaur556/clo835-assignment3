@@ -23,7 +23,7 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           value: pw
         volumeMounts:
-        - mountPath: /data
+        - mountPath: /var/lib/mysql
           name: mysql-pvc
       volumes:
         - name: mysql-pvc
